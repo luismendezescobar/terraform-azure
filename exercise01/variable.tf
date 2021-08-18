@@ -1,9 +1,9 @@
 variable "region"{
-    default="westus"
+    default="centralus"
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="183-88a89a1a-deploy-an-azure-file-share-with-terra"
+    default="183-1b74fb5a-deploy-an-azure-file-share-with-terra"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 

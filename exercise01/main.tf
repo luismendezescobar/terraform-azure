@@ -5,7 +5,7 @@ provider "azurerm" {
 
 terraform{
     backend "azurerm"{
-        resource_group_name ="183-1c80b169-deploy-an-azure-file-share-with-terra"   #the resource group name needs to be copied from the playground as it's not possible to create resource groups
+        resource_group_name ="183-1b74fb5a-deploy-an-azure-file-share-with-terra"   #the resource group name needs to be copied from the playground as it's not possible to create resource groups
         storage_account_name="storage4terra8182021"                #you have to made up this name everytime as it needs to be different, I suggest the date of the day
         container_name      ="statefile"
         key                 ="terraform.tfstate"
