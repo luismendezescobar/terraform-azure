@@ -1,6 +1,5 @@
 provider "azurerm" {   
-    #features{}
-          
+     version=1.38          
 }
  #version=2.72       
 terraform{
@@ -44,8 +43,8 @@ resource "azurerm_storage_account" "sa"{
 
 resource "azurerm_storage_account" "lab" {
   name                     = "mystorage8182021"
-  resource_group_name      = "183-1c80b169-deploy-an-azure-file-share-with-terra"
-  location                 = "westus"
+  resource_group_name      = var.ResourceGroup
+  location                 = var.region
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }

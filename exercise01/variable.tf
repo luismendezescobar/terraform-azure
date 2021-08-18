@@ -1,9 +1,9 @@
 variable "region"{
-    default="eastus"
+    default="westus"
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="1-1b461b3a-playground-sandbox"
+    default="183-88a89a1a-deploy-an-azure-file-share-with-terra"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
