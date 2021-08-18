@@ -71,34 +71,7 @@ resource "azurerm_storage_share" "lab" {
   storage_account_name = azurerm_storage_account.lab.name
   quota                = 50
 }
-
-####################################################################################################################
-# Create virtual network
-resource "azurerm_virtual_network" "TFNet" {
-    name                = "network8182021"
-    address_space       = ["10.0.0.0/16"]
-    location            = var.region
-    resource_group_name = var.ResourceGroup
-
-    tags = {
-        environment = "Terraform Networking"
-    }
-}
-
-# Create subnet
-resource "azurerm_subnet" "tfsubnet" {
-    name                 = "LabSubnet"
-    resource_group_name = var.ResourceGroup
-    virtual_network_name = azurerm_virtual_network.TFNet.name
-    address_prefix       = "10.0.1.0/24"
-}
-resource "azurerm_subnet" "tfsubnet2" {
-    name                 = "LabSubnet2"
-    resource_group_name = var.ResourceGroup
-    virtual_network_name = azurerm_virtual_network.TFNet.name
-    address_prefix       = "10.0.2.0/24"
-}
-#########################################################################################################################
+#################################################################################################################
 #create network security groups
 
 resource "azurerm_network_security_group" "nsg" {
@@ -121,7 +94,7 @@ resource "azurerm_network_security_rule" "example1-allow80" {
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
-resource "azurerm_network_security_rule" "example2-allow8080" {
+resource "azurerm_network_security_rule" "example2-deny8080" {
   name                        = "Web8080"
   priority                    = 1000
   direction                   = "Inbound"
@@ -148,3 +121,34 @@ resource "azurerm_network_security_rule" "example2-allow8080" {
   resource_group_name         = var.ResourceGroup
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
+
+####################################################################################################################
+# Create virtual network
+resource "azurerm_virtual_network" "TFNet" {
+    name                = "network8182021"
+    address_space       = ["10.0.0.0/16"]
+    location            = var.region
+    resource_group_name = var.ResourceGroup
+
+    tags = {
+        environment = "Terraform Networking"
+    }
+    subnet= {                              
+          security_group = azurerm_network_security_group.nsg.name
+        }
+}
+
+# Create subnet
+resource "azurerm_subnet" "tfsubnet" {
+    name                 = "LabSubnet"
+    resource_group_name = var.ResourceGroup
+    virtual_network_name = azurerm_virtual_network.TFNet.name
+    address_prefix       = "10.0.1.0/24"
+}
+resource "azurerm_subnet" "tfsubnet2" {
+    name                 = "LabSubnet2"
+    resource_group_name = var.ResourceGroup
+    virtual_network_name = azurerm_virtual_network.TFNet.name
+    address_prefix       = "10.0.2.0/24"
+}
+#########################################################################################################################
