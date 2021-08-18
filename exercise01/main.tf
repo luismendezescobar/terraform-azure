@@ -2,6 +2,7 @@ provider "azurerm" {
      version=1.38          
 }
  #version=2.72       
+/*
 terraform{
     backend "azurerm"{
         resource_group_name ="183-1c80b169-deploy-an-azure-file-share-with-terra"   #the resource group name needs to be copied from the playground as it's not possible to create resource groups
@@ -10,7 +11,7 @@ terraform{
         key                 ="terraform.tfstate"
     }
 }
-
+*/
 #first run terraform init
 #then terraform plan
 #then terraform apply
