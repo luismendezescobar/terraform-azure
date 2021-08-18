@@ -133,14 +133,18 @@ resource "azurerm_virtual_network" "TFNet" {
     tags = {
         environment = "Terraform Networking"
     }
-    subnet{                              
-        name                = "network8182021222"
-        address_prefix       = "10.0.3.0/24"
-        security_group = azurerm_network_security_group.nsg.id
+    dynamic "subnet"{                              
+        for_each=var.subnets
+        content{
+            name           = subnet.value.name
+            address_prefix = subnet.value.address_prefix
+            security_group = azurerm_network_security_group.nsg.id
+        }
     }
 }
 
 # Create subnet
+/*
 resource "azurerm_subnet" "tfsubnet" {
     name                 = "LabSubnet"
     resource_group_name = var.ResourceGroup
@@ -153,4 +157,5 @@ resource "azurerm_subnet" "tfsubnet2" {
     virtual_network_name = azurerm_virtual_network.TFNet.name
     address_prefix       = "10.0.2.0/24"
 }
+*/
 #########################################################################################################################

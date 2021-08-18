@@ -3,7 +3,7 @@ variable "region"{
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="185-9b239f77-create-azure-nsgs-with-terraform-8w8"
+    default="185-b5d4ec02-create-azure-nsgs-with-terraform-8w8"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
@@ -13,4 +13,30 @@ variable "Storage_Account_name"{
 }
 
 
+variable "subnets" {
+    type=map(object({
+        subnet_definitions=set(object({
+            name           = string
+            address_prefix  = string
+            security_group  = string
+        }))
+    }))
 
+
+    default={
+        LabSubnet={
+            subnet_definitions=[
+                {
+                    name           = "LabSubnet"
+                    address_prefix = "10.0.3.0/24"
+                    security_group = ""
+                },
+                {
+                   name           = "LabSubnet2"
+                   address_prefix = "10.0.3.0/24"
+                   security_group = ""
+                }
+            ] 
+        }       
+    }
+}
