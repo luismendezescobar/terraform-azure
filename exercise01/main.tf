@@ -2,16 +2,16 @@ provider "azurerm" {
      version=1.38          
 }
  #version=2.72       
-/*
+
 terraform{
     backend "azurerm"{
         resource_group_name ="183-1c80b169-deploy-an-azure-file-share-with-terra"   #the resource group name needs to be copied from the playground as it's not possible to create resource groups
-        storage_account_name="storage4terra8172021"                #you have to made up this name everytime as it needs to be different, I suggest the date of the day
+        storage_account_name="storage4terra8182021"                #you have to made up this name everytime as it needs to be different, I suggest the date of the day
         container_name      ="statefile"
         key                 ="terraform.tfstate"
     }
 }
-*/
+
 #first run terraform init
 #then terraform plan
 #then terraform apply
@@ -25,7 +25,7 @@ terraform{
 #        environment="terraform"
 #        deployedby   ="Admin"
 #    }
-#}
+#}ter
 
 #with this one we are going to create a storage account
 /*
