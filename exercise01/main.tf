@@ -98,3 +98,53 @@ resource "azurerm_subnet" "tfsubnet2" {
     virtual_network_name = azurerm_virtual_network.TFNet.name
     address_prefix       = "10.0.2.0/24"
 }
+#########################################################################################################################
+#create network security groups
+
+resource "azurerm_network_security_group" "nsg" {
+  name                = "LabNSG"
+  location            = var.region
+  resource_group_name = var.ResourceGroup
+}
+
+resource "azurerm_network_security_rule" "example1-allow80" {
+  name                        = "Web80"
+  priority                    = 1001
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "80"
+  destination_port_range      = "80"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = var.ResourceGroup
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "example2-allow8080" {
+  name                        = "Web8080"
+  priority                    = 1000
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "Tcp"
+  source_port_range           = "8080"
+  destination_port_range      = "8080"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = var.ResourceGroup
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+  resource "azurerm_network_security_rule" "example3-allow22" {
+  name                        = "SSH"
+  priority                    = 1100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "22"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = var.ResourceGroup
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
