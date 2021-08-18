@@ -133,9 +133,9 @@ resource "azurerm_virtual_network" "TFNet" {
     tags = {
         environment = "Terraform Networking"
     }
-    subnet= {                              
+    subnet{                              
           security_group = azurerm_network_security_group.nsg.name
-        }
+    }
 }
 
 # Create subnet
