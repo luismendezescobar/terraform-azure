@@ -1,6 +1,7 @@
 provider "azurerm" {   
-    version=2.72               
+          
 }
+ #version=2.72       
 terraform{
     backend "azurerm"{
         resource_group_name ="1-1b461b3a-playground-sandbox"   #the resource group name needs to be copied from the playground as it's not possible to create resource groups
