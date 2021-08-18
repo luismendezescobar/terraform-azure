@@ -136,7 +136,7 @@ resource "azurerm_virtual_network" "TFNet" {
     subnet{                              
         name                = "network8182021222"
         address_prefix       = 16
-        security_group = azurerm_network_security_group.nsg.name
+        security_group = azurerm_network_security_group.nsg.id
     }
 }
 
