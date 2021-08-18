@@ -1,6 +1,5 @@
-provider "azurerm" {   #this can be in blank too
-    version=2.72             
-  
+provider "azurerm" {   
+    version=2.72               
 }
 terraform{
     backend "azurerm"{
