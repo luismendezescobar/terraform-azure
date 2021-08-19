@@ -1,9 +1,9 @@
 variable "region"{
-    default="centralus"                     #this has to be same region as resource group
+    default="westus"                     #this has to be same region as resource group
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="185-0a8bb5df-create-azure-nsgs-with-terraform-8w8"
+    default="187-47846aaf-deploying-an-azure-vm-with-terraform"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
