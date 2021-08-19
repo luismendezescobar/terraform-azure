@@ -174,7 +174,7 @@ resource "azurerm_network_interface" "example" {
     ip_configuration {
     name                          = "ipconfig1"
     #subnet_id                     = data.azurerm_subnet.tfsubnet 
-    subnet_id                     = azurerm_virtual_network.TFNet.subnet_id.LabSubnet
+    subnet_id                     = azurerm_virtual_network.TFNet.subnet["LabSubnet"].subnet_id
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
