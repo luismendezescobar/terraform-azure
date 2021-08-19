@@ -172,7 +172,7 @@ resource "azurerm_network_interface" "example" {
 
     ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = azurerm_subnet.tfsubnet.id 
+    subnet_id                     = data.azurerm_subnet.tfsubnet 
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
@@ -180,7 +180,7 @@ resource "azurerm_network_interface" "example" {
 
 #Create Boot Diagnostic Account
 resource "azurerm_storage_account" "sa" {
-  name                     = "forged_boot_diag" 
+  name                     = "forgedbootdiag" 
   resource_group_name      = var.ResourceGroup
   location                 = var.region
    account_tier            = "Standard"
