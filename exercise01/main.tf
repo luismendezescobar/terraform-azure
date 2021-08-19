@@ -157,12 +157,13 @@ resource "azurerm_public_ip" "example" {
   sku                 = "Basic"
 }
 #we need to get information of the subnet that we are going to use so we use data
+/*
 data "azurerm_subnet" "tfsubnet"{
     name="LabSubnet"
     virtual_network_name = "network818202101"
     resource_group_name = var.ResourceGroup
 }
-
+*/
 
 #Create NIC
 resource "azurerm_network_interface" "example" {
@@ -172,7 +173,8 @@ resource "azurerm_network_interface" "example" {
 
     ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = data.azurerm_subnet.tfsubnet 
+    #subnet_id                     = data.azurerm_subnet.tfsubnet 
+    subnet_id                     = azurerm_virtual_network.TFNet.subnet_id["LabSubnet"]
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
