@@ -172,9 +172,8 @@ resource "azurerm_network_interface" "example" {
   resource_group_name = var.ResourceGroup
 
     ip_configuration {
-    name                          = "ipconfig1"
-    #subnet_id                     = data.azurerm_subnet.tfsubnet 
-    subnet_id                     = azurerm_virtual_network.TFNet.subnet["LabSubnet"].subnet_id
+    name                          = "ipconfig1"    
+    subnet_id                     = [for k in azurerm_virtual_network.TFNet.subnet :  k == "LabSubnet"  ? azurerm_virtual_network.TFNet.subnet_id]
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
