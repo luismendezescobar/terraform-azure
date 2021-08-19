@@ -24,12 +24,12 @@ variable "subnets" {
     default=[
         {
             name           = "LabSubnet"
-            address_prefix = "10.0.3.0/24"
+            address_prefix = "10.0.1.0/24"
             security_group = ""
         },
         {
             name           = "LabSubnet2"
-            address_prefix = "10.0.3.0/24"
+            address_prefix = "10.0.2.0/24"
             security_group = ""
         }                
     ]

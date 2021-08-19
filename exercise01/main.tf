@@ -134,13 +134,15 @@ resource "azurerm_virtual_network" "TFNet" {
     tags = {
         environment = "Terraform Networking"
     }
-    dynamic "subnet"{                              
-        for_each=var.subnets
-        content{
-            name           = subnet.value.name
-            address_prefix = subnet.value.address_prefix
-            security_group = azurerm_network_security_group.nsg.id
-        }
+    subnet{                              
+        name           = "LabSubnet"
+        address_prefix = "10.0.1.0/24"
+        security_group = azurerm_network_security_group.nsg.id        
+    }
+    subnet{                              
+        name           = "LabSubnet"
+        address_prefix = "10.0.2.0/24"
+        security_group = azurerm_network_security_group.nsg.id        
     }
 }
 */
@@ -154,8 +156,28 @@ resource "azurerm_virtual_network" "TFNet" {
     tags = {
         environment = "Terraform Networking"
     }
+    dynamic "subnet"{                              
+        for_each=var.subnets
+        content{
+            name           = subnet.value.name
+            address_prefix = subnet.value.address_prefix
+            security_group = azurerm_network_security_group.nsg.id
+        }
+    }
 }
 
+/*
+resource "azurerm_virtual_network" "TFNet" {
+    name                = "network818202101"
+    address_space       = ["10.0.0.0/16"]
+    location            = var.region
+    resource_group_name = var.ResourceGroup
+
+    tags = {
+        environment = "Terraform Networking"
+    }
+}
+*/
 # Create subnet
 /*
 resource "azurerm_subnet" "tfsubnet" {
