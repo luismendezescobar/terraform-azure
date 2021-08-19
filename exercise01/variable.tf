@@ -3,7 +3,7 @@ variable "region"{
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="185-b5d4ec02-create-azure-nsgs-with-terraform-8w8"
+    default="185-0a8bb5df-create-azure-nsgs-with-terraform-8w8"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
