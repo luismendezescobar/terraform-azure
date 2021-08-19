@@ -14,29 +14,23 @@ variable "Storage_Account_name"{
 
 
 variable "subnets" {
-    type=map(object({
-        subnet_definitions=set(object({
-            name           = string
-            address_prefix  = string
-            security_group  = string
-        }))
+    type=list(object({        
+        name           = string
+        address_prefix  = string
+        security_group  = string        
     }))
 
 
-    default={
-        LabSubnet={
-            subnet_definitions=[
-                {
-                    name           = "LabSubnet"
-                    address_prefix = "10.0.3.0/24"
-                    security_group = ""
-                },
-                {
-                   name           = "LabSubnet2"
-                   address_prefix = "10.0.3.0/24"
-                   security_group = ""
-                }
-            ] 
-        }       
-    }
+    default=[
+        {
+            name           = "LabSubnet"
+            address_prefix = "10.0.3.0/24"
+            security_group = ""
+        },
+        {
+            name           = "LabSubnet2"
+            address_prefix = "10.0.3.0/24"
+            security_group = ""
+        }                
+    ]
 }
