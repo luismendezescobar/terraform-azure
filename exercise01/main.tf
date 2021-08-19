@@ -164,6 +164,13 @@ data "azurerm_subnet" "tfsubnet"{
     resource_group_name = var.ResourceGroup
 }
 */
+# Create subnet for vm
+resource "azurerm_subnet" "tfsubnet" {
+    name                 = "LabSubnet4"
+    resource_group_name = var.ResourceGroup
+    virtual_network_name = azurerm_virtual_network.TFNet.name
+    address_prefix       = "10.0.4.0/24"
+}
 
 #Create NIC
 resource "azurerm_network_interface" "example" {
@@ -173,7 +180,8 @@ resource "azurerm_network_interface" "example" {
 
     ip_configuration {
     name                          = "ipconfig1"    
-    subnet_id                     = [for k in azurerm_virtual_network.TFNet.subnet :  contains(k , "LabSubnet")  ? azurerm_virtual_network.TFNet.subnet:""]
+    #subnet_id                     = [for k in azurerm_virtual_network.TFNet.subnet :  contains(k , "LabSubnet")  ? azurerm_virtual_network.TFNet.subnet:""]
+    subnet_id = azurerm_subnet.tfsubnet.id
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
