@@ -124,6 +124,7 @@ resource "azurerm_network_security_rule" "example2-deny8080" {
 
 ####################################################################################################################
 # Create virtual network
+/*
 resource "azurerm_virtual_network" "TFNet" {
     name                = "network818202101"
     address_space       = ["10.0.0.0/16"]
@@ -140,6 +141,18 @@ resource "azurerm_virtual_network" "TFNet" {
             address_prefix = subnet.value.address_prefix
             security_group = azurerm_network_security_group.nsg.id
         }
+    }
+}
+*/
+
+resource "azurerm_virtual_network" "TFNet" {
+    name                = "network818202101"
+    address_space       = ["10.0.0.0/16"]
+    location            = var.region
+    resource_group_name = var.ResourceGroup
+
+    tags = {
+        environment = "Terraform Networking"
     }
 }
 
