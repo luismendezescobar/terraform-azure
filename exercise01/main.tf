@@ -123,29 +123,9 @@ resource "azurerm_network_security_rule" "example2-deny8080" {
 }
 
 ####################################################################################################################
-# Create virtual network
-/*
-resource "azurerm_virtual_network" "TFNet" {
-    name                = "network818202101"
-    address_space       = ["10.0.0.0/16"]
-    location            = var.region
-    resource_group_name = var.ResourceGroup
+# Create virtual network and subnetworks
 
-    tags = {
-        environment = "Terraform Networking"
-    }
-    subnet{                              
-        name           = "LabSubnet"
-        address_prefix = "10.0.1.0/24"
-        security_group = azurerm_network_security_group.nsg.id        
-    }
-    subnet{                              
-        name           = "LabSubnet"
-        address_prefix = "10.0.2.0/24"
-        security_group = azurerm_network_security_group.nsg.id        
-    }
-}
-*/
+
 
 resource "azurerm_virtual_network" "TFNet" {
     name                = "network818202101"
@@ -166,31 +146,4 @@ resource "azurerm_virtual_network" "TFNet" {
     }
 }
 
-/*
-resource "azurerm_virtual_network" "TFNet" {
-    name                = "network818202101"
-    address_space       = ["10.0.0.0/16"]
-    location            = var.region
-    resource_group_name = var.ResourceGroup
-
-    tags = {
-        environment = "Terraform Networking"
-    }
-}
-*/
-# Create subnet
-/*
-resource "azurerm_subnet" "tfsubnet" {
-    name                 = "LabSubnet"
-    resource_group_name = var.ResourceGroup
-    virtual_network_name = azurerm_virtual_network.TFNet.name
-    address_prefix       = "10.0.1.0/24"
-}
-resource "azurerm_subnet" "tfsubnet2" {
-    name                 = "LabSubnet2"
-    resource_group_name = var.ResourceGroup
-    virtual_network_name = azurerm_virtual_network.TFNet.name
-    address_prefix       = "10.0.2.0/24"
-}
-*/
 #########################################################################################################################

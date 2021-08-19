@@ -31,6 +31,11 @@ variable "subnets" {
             name           = "LabSubnet2"
             address_prefix = "10.0.2.0/24"
             security_group = ""
-        }                
+        },                
+        {
+            name           = "LabSubnet3"
+            address_prefix = "10.0.3.0/24"
+            security_group = ""
+        }
     ]
 }
