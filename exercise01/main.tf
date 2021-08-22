@@ -183,7 +183,7 @@ locals{
 #output "subnets"{value=local.all_subnets}
 
 output "subnets"{
-  value = [for name in local.all_subnets : name.id]
+  value = [for name in local.all_subnets : name.id if LabSubnet="LabSubnet"]
 }
 /*
 resource "azurerm_network_interface" "example" {
