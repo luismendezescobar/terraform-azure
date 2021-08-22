@@ -180,7 +180,11 @@ locals{
 }
 
 
-output "subnets"{value=local.all_subnets}
+#output "subnets"{value=local.all_subnets}
+
+output "subnets"{
+  value = [for name in var.all_subnets : name.id]
+}
 /*
 resource "azurerm_network_interface" "example" {
   name                = "mynic"  
