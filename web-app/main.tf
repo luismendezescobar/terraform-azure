@@ -10,9 +10,13 @@ terraform {
       # explicitness.
       source  = "hashicorp/azurerm"
       version = "~> 2.12"
-      features {}
+   
     }
   }
+}
+
+provider "azurerm" {
+features {}
 }
 
 resource "azurerm_app_service_plan" "svcplan" {
