@@ -1,9 +1,9 @@
 variable "region"{
-    default="westus"                     #this has to be same region as resource group
+    default="South Central US"                     #this has to be same region as resource group
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="187-47846aaf-deploying-an-azure-vm-with-terraform"
+    default="1-5222d440-playground-sandbox"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
