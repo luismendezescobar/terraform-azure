@@ -147,7 +147,7 @@ resource "azurerm_virtual_network" "TFNet" {
 }
 
 #########################################################################################################################
-
+############# Create a VM ##########################################################################################
 #Deploy Public IP
 resource "azurerm_public_ip" "example" {
   name                = "pubip1"
@@ -174,6 +174,7 @@ resource "azurerm_subnet" "tfsubnet" {
 }
 */
 #Create NIC
+#this is to get a map with all the subnets that we have
 locals{
     all_subnets={for sub in azurerm_virtual_network.TFNet.subnet: sub.name => sub }
 
@@ -187,16 +188,16 @@ output "subnets"{
 }*/
 output "subnets"{value=local.all_subnets.LabSubnet.id}
 
-/*
+
 resource "azurerm_network_interface" "example" {
   name                = "mynic"  
   location            = var.region
   resource_group_name = var.ResourceGroup
 
     ip_configuration {
-    name                          = "ipconfig1"    
-    subnet_id                     = [for k in all_subnets :  k=="LabSubnet" ? k.id:""]
+    name                          = "ipconfig1"        
     #subnet_id = azurerm_subnet.tfsubnet.id
+    subnet_id = local.all_subnets.LabSubnet.id
     private_ip_address_allocation  = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
@@ -220,8 +221,7 @@ resource "azurerm_storage_account" "sa" {
 resource "azurerm_virtual_machine" "example" {
   name                  = "my-machine"  
   location              = var.region
-  resource_group_name   = var.ResourceGroup
-  #network_interface_ids = [azurerm_network_interface.example.id]
+  resource_group_name   = var.ResourceGroup  
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = "Standard_B1s"
   delete_os_disk_on_termination = true
@@ -236,7 +236,7 @@ resource "azurerm_virtual_machine" "example" {
 
   storage_os_disk {
     name              = "osdisk1"
-    disk_size_gb      = "128"
+    disk_size_gb      = "50"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -258,4 +258,3 @@ boot_diagnostics {
     }
 }
 
-*/
