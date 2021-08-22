@@ -1,6 +1,18 @@
-provider "azurerm" {
-    version = 1.38
+
+terraform {
+  required_providers {
+    azurerm = {
+      # The "hashicorp" namespace is the new home for the HashiCorp-maintained
+      # provider plugins.
+      #
+      # source is not required for the hashicorp/* namespace as a measure of
+      # backward compatibility for commonly-used providers, but recommended for
+      # explicitness.
+      source  = "hashicorp/azurerm"
+      version = "~> 2.12"
     }
+  }
+}
 
 resource "azurerm_app_service_plan" "svcplan" {
   name                = "my-web-plan-8222021"               #unique name
@@ -25,3 +37,5 @@ resource "azurerm_app_service" "appsvc" {
     scm_type                 = "LocalGit"
   }
 }
+
+
