@@ -28,7 +28,7 @@ resource "azurerm_mysql_server" "example" {
   location            = var.region
   resource_group_name = var.ResourceGroup
 
-  sku {
+  sku_name {
     name     = "B_Gen5_2"
     capacity = 2
     tier     = "Basic"
