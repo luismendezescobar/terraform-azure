@@ -179,6 +179,9 @@ locals{
 
 }
 
+
+output "subnets"{value=all_subnets}
+/*
 resource "azurerm_network_interface" "example" {
   name                = "mynic"  
   location            = var.region
@@ -212,6 +215,7 @@ resource "azurerm_virtual_machine" "example" {
   name                  = "my-machine"  
   location              = var.region
   resource_group_name   = var.ResourceGroup
+  #network_interface_ids = [azurerm_network_interface.example.id]
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = "Standard_B1s"
   delete_os_disk_on_termination = true
@@ -247,3 +251,5 @@ boot_diagnostics {
         storage_uri = azurerm_storage_account.sa.primary_blob_endpoint
     }
 }
+
+*/
