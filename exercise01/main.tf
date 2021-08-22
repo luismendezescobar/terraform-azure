@@ -180,7 +180,7 @@ locals{
 }
 
 
-output "subnets"{value=all_subnets}
+output "subnets"{value=local.all_subnets}
 /*
 resource "azurerm_network_interface" "example" {
   name                = "mynic"  
