@@ -181,10 +181,12 @@ locals{
 
 
 #output "subnets"{value=local.all_subnets}
-
+/*
 output "subnets"{
-  value = [for name in local.all_subnets : name="LabSubnet" :name.id?""]
-}
+  value = [for name in local.all_subnets : name.id]
+}*/
+output "subnets"{value=local.all_subnets.LabSubnet}
+
 /*
 resource "azurerm_network_interface" "example" {
   name                = "mynic"  
