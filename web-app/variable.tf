@@ -1,9 +1,9 @@
 variable "region"{
-    default="South Central US"                     #this has to be same region as resource group
+    default="West US"                     #this has to be same region as resource group
     description="Azure Region"
 }
 variable "ResourceGroup"{
-    default="1-5222d440-playground-sandbox"
+    default="191-8814cf4b-deploy-a-web-application-with-terrafo"
     description="Here goes the resource group for the storage account. copy the default from the play ground"
 }
 
