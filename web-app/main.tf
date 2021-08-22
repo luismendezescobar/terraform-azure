@@ -16,7 +16,7 @@ resource "azurerm_app_service_plan" "svcplan" {
 resource "azurerm_app_service" "appsvc" {
   name                = "my-web-app-8222021"  #unique name
   location            = "eastus"
-  resource_group_name = "Enter Resource Group Name"
+  resource_group_name = var.ResourceGroup
   app_service_plan_id = azurerm_app_service_plan.svcplan.id
 
 
