@@ -10,16 +10,19 @@ terraform {
       # explicitness.
       source  = "hashicorp/azurerm"
       version = "~> 2.12"
-      features{}
+
    
     }
   }
 }
-/*
+
 provider "azurerm" {
-features {}
+  features {}
+  subscription_id="4cedc5dd-e3ad-468d-bf66-32e31bdb9148"
+  #skip_provider_registration = "true"
+      
 }
-*/
+
 resource "azurerm_app_service_plan" "svcplan" {
   name                = "my-web-plan-8222021"               #unique name
   location            = var.region
