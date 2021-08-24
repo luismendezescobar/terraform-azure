@@ -14,13 +14,13 @@ module "network" {
   source              = "./modules/network"
   prefix              = "${var.prefix}"
   resource_group_name = "${data.azurerm_resource_group.test.name}"
-  location            = "${azurerm_resource_group.test.location}"
+  location            = "${data.azurerm_resource_group.test.location}"
 }
 
 module "active-directory-domain" {
   source                        = "./modules/active-directory"
   resource_group_name           = "${data.azurerm_resource_group.test.name}"
-  location                      = "${azurerm_resource_group.test.location}"
+  location                      = "${data.azurerm_resource_group.test.location}"
   prefix                        = "${var.prefix}"
   subnet_id                     = "${module.network.domain_controllers_subnet_id}"
   active_directory_domain       = "${var.prefix}.local"
@@ -32,7 +32,7 @@ module "active-directory-domain" {
 module "windows-client" {
   source                    = "./modules/windows-client"
   resource_group_name       = "${data.azurerm_resource_group.test.name}"
-  location                  = "${azurerm_resource_group.test.location}"
+  location                  = "${data.azurerm_resource_group.test.location}"
   prefix                    = "${var.prefix}"
   subnet_id                 = "${module.network.domain_clients_subnet_id}"
   active_directory_domain   = "${var.prefix}.local"
