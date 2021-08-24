@@ -15,6 +15,6 @@ variable "admin_password" {
 
 
 variable "resource_group"{
-  default=
+  default="1-d7e73d7b-playground-sandbox"
   description = "update the resource group here"
 }
