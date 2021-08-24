@@ -1,5 +1,5 @@
-provider "azurerm" {
-  version = "=1.1.2"
+provider "azurerm" {   
+    version=1.38          
 }
 
 locals {
