@@ -9,7 +9,7 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  default="P@ssw0rd"
+  default="PassW0rd1234!"
   description = "The password of the administrator account for both the local accounts, and Active Directory accounts. Needs to comply with the Windows Password Policy. Example: `PassW0rd1234!`"
 }
 
