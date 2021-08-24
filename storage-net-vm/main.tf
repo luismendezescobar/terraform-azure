@@ -179,6 +179,22 @@ locals{
     all_subnets={for sub in azurerm_virtual_network.TFNet.subnet: sub.name => sub }
 
 }
+/*the output will be like this
+~ subnets = {
+    - LabSubnet  = {
+        - address_prefix = "10.0.1.0/24"
+        - id             = "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-5222d440-playground-sandbox/providers/Microsoft.Network/virtualNetworks/network818202101/subnets/LabSubnet"
+        - name           = "LabSubnet"
+        - security_group = "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-5222d440-playground-sandbox/providers/Microsoft.Network/networkSecurityGroups/LabNSG"
+      }
+    - LabSubnet2 = {
+        - address_prefix = "10.0.2.0/24"
+        - id             = "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-5222d440-playground-sandbox/providers/Microsoft.Network/virtualNetworks/network818202101/subnets/LabSubnet2"
+        - name           = "LabSubnet2"
+        - security_group = "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/1-5222d440-playground-sandbox/providers/Microsoft.Network/networkSecurityGroups/LabNSG"
+      }
+  }
+*/
 
 
 #output "subnets"{value=local.all_subnets}
