@@ -29,6 +29,12 @@ module "active-directory-domain" {
   admin_password                = "${var.admin_password}"
 }
 
+output "public_ip_address_ad_server" {
+  value = "${module.active-directory.public_ip_address_ad}"
+}
+
+
+/*
 module "windows-client" {
   source                    = "./modules/windows-client"
   resource_group_name       = "${data.azurerm_resource_group.test.name}"
@@ -45,3 +51,4 @@ module "windows-client" {
 output "windows_client_public_ip" {
   value = "${module.windows-client.public_ip_address}"
 }
+*/
