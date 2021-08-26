@@ -30,7 +30,7 @@ module "active-directory-domain" {
 }
 
 output "public_ip_address_ad_server" {
-  value = "${module.active-directory.public_ip_address_ad}"
+  value = "${module.active-directory-domain.public_ip_address_ad}"
 }
 
 
