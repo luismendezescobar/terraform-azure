@@ -34,7 +34,7 @@ output "public_ip_address_ad_server" {
 }
 
 
-/*
+
 module "windows-client" {
   source                    = "./modules/windows-client"
   resource_group_name       = "${data.azurerm_resource_group.test.name}"
@@ -51,4 +51,3 @@ module "windows-client" {
 output "windows_client_public_ip" {
   value = "${module.windows-client.public_ip_address}"
 }
-*/
