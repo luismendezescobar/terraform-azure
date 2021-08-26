@@ -1,5 +1,5 @@
 locals {
-  virtual_machine_name = "${var.prefix}-client-02"
+  virtual_machine_name = "${var.prefix}-client"
 }
 
 resource "azurerm_virtual_machine" "client" {
