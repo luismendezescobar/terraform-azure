@@ -28,6 +28,10 @@ locals {
 }
 
 
+output "output_main_instance_group_name" {
+  value=local.instance_group_name
+}
+
 module "webserver_vm_instance" {
   for_each              = var.webserver_vm_info
   source                = "./modules/terraform-mckesson-gcp-gce-vm"
