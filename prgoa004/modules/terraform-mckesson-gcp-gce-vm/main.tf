@@ -47,7 +47,9 @@ resource "google_compute_instance" "gce_machine" {
   boot_disk {
     auto_delete = var.auto_delete
   
+  
     initialize_params {
+      image = var.source_image != "" ? var.source_image : data.google_compute_image.image[0].self_link
       size  = var.disk_size_gb
       type  = var.disk_type
     }
