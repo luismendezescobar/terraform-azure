@@ -215,7 +215,7 @@ variable "private_network" {
 variable "instance_tier" {
   description = "CloudSQL Instance size"
   type        = string
-  #default     = ""
+  default     = "5"
 }
 
 variable "availability_type" {
