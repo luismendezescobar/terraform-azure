@@ -30,7 +30,7 @@ locals {
 
 module "webserver_vm_instance" {
   for_each              = var.webserver_vm_info
-  source                = "modules/terraform-mckesson-gcp-gce-vm"
+  source                = "./modules/terraform-mckesson-gcp-gce-vm"
   project_id            = var.project_id
   region                = var.region
   subnetwork            = var.subnetwork
