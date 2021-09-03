@@ -31,6 +31,17 @@ locals {
 output "output_main_instance_group_name" {
   value=local.instance_group_name
 }
+output "output_main_project_name" {
+  value=local.project_name
+}
+output "output_main_loadbalancers" {
+  value=local.loadbalancers
+}
+output "output_main_loadbalancers_map" {
+  value=local.loadbalancer_map
+}
+
+
 
 module "webserver_vm_instance" {
   for_each              = var.webserver_vm_info
