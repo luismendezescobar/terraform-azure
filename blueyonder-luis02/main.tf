@@ -67,44 +67,32 @@ resource "azurerm_network_interface" "db" {
    # count                         = var.web_node_count 
 }
 
-data "azurerm_image" "custom" {
-  name                = "${var.custom_image_name}"
-  resource_group_name = "${var.custom_image_resource_group_name}"
-}
 
-resource "azurerm_virtual_machine" "db" {
+resource "azurerm_windows_virtual_machine" "db" {
   name                              = var.db_name
   location                          = data.azurerm_resource_group.rg.location
   resource_group_name               = data.azurerm_resource_group.rg.name
+  size                              = var.db_node_size
   network_interface_ids             = [azurerm_network_interface.db.id]
-  vm_size                           = var.db_node_size
-  delete_os_disk_on_termination     = true
-  delete_data_disks_on_termination  = true
-  storage_image_reference {
-    id = "${data.azurerm_image.custom.id}"
-  }
-  storage_os_disk {
-    name              = "${lower(var.db_name)}-os"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-  os_profile {
-    computer_name  = var.db_name
-    admin_username = var.ad_vm_adminuserorgroup 
-    admin_password = var.local_vm_password
-  }
-  
+  admin_username = var.ad_vm_adminuserorgroup 
+  admin_password = var.local_vm_password 
   tags                            = var.resource_tags
- 
 
-  
+  os_disk {
+    name                          = "${lower(var.db_name)}-os"
+    caching                       = "ReadWrite"
+    storage_account_type          = "Standard_LRS"
+  }
+  source_image_id               = var.core_image_reference
+
+    
     
 
 # Uncomment for PROD 
  boot_diagnostics {
-    enabled               =true
+  
     storage_uri           = azurerm_storage_container.lab.id
+    
  }
 
 
@@ -112,7 +100,7 @@ resource "azurerm_virtual_machine" "db" {
 
 # add a data disk SQL Binaries
 resource "azurerm_managed_disk" "sqlbindisk" {
-    name                            = "${azurerm_virtual_machine.db.name}-data-sql-binaries" 
+    name                            = "${azurerm_windows_virtual_machine.db.name}-data-sql-binaries" 
     location                        = data.azurerm_resource_group.rg.location
     resource_group_name             = data.azurerm_resource_group.rg.name
     storage_account_type            = "Premium_LRS"
@@ -133,7 +121,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "sqlbindisk_attach" {
 
 # add a data disk SQL database data
 resource "azurerm_managed_disk" "sqldatadisk" {
-    name                            = "${azurerm_virtual_machine.db.name}-sqldata" 
+    name                            = "${azurerm_windows_virtual_machine.db.name}-sqldata" 
     location                        = data.azurerm_resource_group.rg.location
     resource_group_name             = data.azurerm_resource_group.rg.name
     storage_account_type            = "Premium_LRS"
@@ -154,7 +142,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "sqldatadisk_attach" {
 
 # add a data disk SQL database log
 resource "azurerm_managed_disk" "sqllogdisk" {
-    name                            = "${azurerm_virtual_machine.db.name}-sqllog" 
+    name                            = "${azurerm_windows_virtual_machine.db.name}-sqllog" 
     location                        = data.azurerm_resource_group.rg.location
     resource_group_name             = data.azurerm_resource_group.rg.name
     storage_account_type            = "Premium_LRS"
@@ -176,7 +164,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "sqllogdisk_attach" {
 
 # add a data disk SQL tempdb log
 resource "azurerm_managed_disk" "sqltempdbdisk" {
-    name                            = "${azurerm_virtual_machine.db.name}-sqltempdbdisk" 
+    name                            = "${azurerm_windows_virtual_machine.db.name}-sqltempdbdisk" 
     location                        = data.azurerm_resource_group.rg.location
     resource_group_name             = data.azurerm_resource_group.rg.name
     storage_account_type            = "Premium_LRS"
@@ -197,7 +185,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "sqltempdbdisk_attach" {
 
 # add a data disk SQL Backups
 resource "azurerm_managed_disk" "sqlbackupdisk" {
-    name                            = "${azurerm_virtual_machine.db.name}-sqlbackupdisk" 
+    name                            = "${azurerm_windows_virtual_machine.db.name}-sqlbackupdisk" 
     location                        = data.azurerm_resource_group.rg.location
     resource_group_name             = data.azurerm_resource_group.rg.name
     storage_account_type            = "Premium_LRS"
@@ -220,7 +208,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "sqlbackupdisk_attach" {
 
 
 ################  Resource Group IAM Assignment
-/*
+
 resource "azurerm_role_assignment" "emp1" {
   scope                =azurerm_resource_group.rg.id
   role_definition_name = "Contributor"
@@ -241,6 +229,6 @@ resource "azurerm_role_assignment" "emp3" {
   principal_id         = "4c9cbda9-a1a0-41e0-8f1d-99c8f39094c2"
   # Irina Berdichevsky - sID 
 }
-*/
+
 
 

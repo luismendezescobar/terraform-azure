@@ -39,20 +39,14 @@ resource "azurerm_storage_container" "lab" {
   storage_account_name  = azurerm_storage_account.lab.name
   container_access_type = "private"
 }
-/*
-resource "azurerm_storage_blob" "lab" {
-  name                   = "BootBlob"
-  storage_account_name   = azurerm_storage_account.lab.name
-  storage_container_name = azurerm_storage_container.lab.name
-  type                   = "Block"
-}
-*/
 
 output "storageaccounturl" {
   value = azurerm_storage_account.lab.id
 }
 
-
+#this is the one that we want
+#in this case it created one called 
+#"https://testluis09032021.blob.core.windows.net/bootblob"
 output "bloburl" {
   value = azurerm_storage_container.lab.id
 }
