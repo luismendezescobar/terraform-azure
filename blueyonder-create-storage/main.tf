@@ -48,4 +48,11 @@ resource "azurerm_storage_blob" "lab" {
 }
 */
 
+output "storageaccounturl" {
+  value = azurerm_storage_account.lab.id
+}
 
+
+output "bloburl" {
+  value = azurerm_storage_container.lab.id
+}
